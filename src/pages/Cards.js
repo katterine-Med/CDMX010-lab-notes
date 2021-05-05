@@ -11,7 +11,15 @@ function Cards() {
     historyCards.push('/CardEdit')
 
   }
+  const noteDelete = async (id) => {
+    if (window.confirm("¿Patito borra nota?")) {
+      await db.collection('newNotes').doc(id).delete();
+      console.log('ya borró')
+    }
+    //promesasd then catch
+  };
 
+ 
   
   return (
     <div className="pageNotes">
