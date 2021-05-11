@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './CardEdit.css';
 import { db } from '../firebase';
 import { useHistory } from 'react-router';
@@ -11,6 +11,7 @@ const inicialValues = {
 
 function CardEdit() {
   const history = useHistory();
+
   const historyPageInNotes = () => {
     history.push('/Cards')
 
@@ -28,28 +29,28 @@ function CardEdit() {
     console.log('agregaste la info')
   }*/
 
-  const addOrEditNote = async (notesinputChange) => {
+  /* const addOrEditNote = async (notesinputChange) => {
     //await db
     //.collection('newNotes').doc().set(notesinputChange);
    //console.log('agregaste la info')
   // console.log(db.collection('newNotes').doc().set(notesinputChange))
   console.log(notesinputChange)
-  };
+  }; */
 
   /*  useEffect(() => {
     addOrEditNote();
 
   })  */
 
-  const notesEdit = e => {
+  const createNote = e => {
     e.preventDefault();
-    addOrEditNote();
 
-    console.log(values);
+    db.collection('newNotes').add(values)
 
   }
+
   
-  useEffect(() => {
+  /*useEffect(() => {
     gNotes();
     console.log(' getting data ...')
   }, []);
@@ -62,7 +63,7 @@ function CardEdit() {
       });
       setValues(docs);
     });
-  };
+  };*/
 
 
   return (
@@ -70,7 +71,7 @@ function CardEdit() {
       <header className="headerW">
         <h1>UglyDucklingNotes</h1>
       </header>
-      <form className="cardContainer" onSubmit={notesEdit}>
+      <form className="cardContainer" onSubmit={createNote}>
         <div className="title">
           <input type="text"
             id="title"
@@ -81,7 +82,7 @@ function CardEdit() {
         </div>
 
         <div className="textEdit">
-          <input type="text"
+          <textarea type="text"
             id="text"
             className="textControl"
             placeholder="Text"
